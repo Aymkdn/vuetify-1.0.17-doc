@@ -1,38 +1,38 @@
 <template>
   <form>
     <v-text-field
+      label="Name"
       v-model="name"
       :error-messages="nameErrors"
       :counter="10"
-      label="Name"
-      required
       @input="$v.name.$touch()"
       @blur="$v.name.$touch()"
+      required
     ></v-text-field>
     <v-text-field
+      label="E-mail"
       v-model="email"
       :error-messages="emailErrors"
-      label="E-mail"
-      required
       @input="$v.email.$touch()"
       @blur="$v.email.$touch()"
+      required
     ></v-text-field>
     <v-select
+      label="Item"
       v-model="select"
       :items="items"
       :error-messages="selectErrors"
-      label="Item"
-      required
       @change="$v.select.$touch()"
       @blur="$v.select.$touch()"
+      required
     ></v-select>
     <v-checkbox
+      label="Do you agree?"
       v-model="checkbox"
       :error-messages="checkboxErrors"
-      label="Do you agree?"
-      required
       @change="$v.checkbox.$touch()"
       @blur="$v.checkbox.$touch()"
+      required
     ></v-checkbox>
 
     <v-btn @click="submit">submit</v-btn>
@@ -46,27 +46,38 @@
 
   export default {
     mixins: [validationMixin],
-
     validations: {
       name: { required, maxLength: maxLength(10) },
       email: { required, email },
       select: { required },
       checkbox: { required }
     },
-
-    data: () => ({
-      name: '',
-      email: '',
-      select: null,
-      items: [
-        'Item 1',
-        'Item 2',
-        'Item 3',
-        'Item 4'
-      ],
-      checkbox: false
-    }),
-
+    data () {
+      return {
+        name: '',
+        email: '',
+        select: null,
+        items: [
+          'Item 1',
+          'Item 2',
+          'Item 3',
+          'Item 4'
+        ],
+        checkbox: false
+      }
+    },
+    methods: {
+      submit () {
+        this.$v.$touch()
+      },
+      clear () {
+        this.$v.$reset()
+        this.name = ''
+        this.email = ''
+        this.select = null
+        this.checkbox = false
+      }
+    },
     computed: {
       checkboxErrors () {
         const errors = []
@@ -94,35 +105,6 @@
         !this.$v.email.required && errors.push('E-mail is required')
         return errors
       }
-    },
-
-    methods: {
-      submit () {
-        this.$v.$touch()
-      },
-      clear () {
-        this.$v.$reset()
-        this.name = ''
-        this.email = ''
-        this.select = null
-        this.checkbox = false
-      }
     }
   }
 </script>
-
-<codepen-resources lang="json">
-  {
-    "js": [
-      "https://unpkg.com/vuelidate/dist/vuelidate.min.js",
-      "https://unpkg.com/vuelidate/dist/validators.min.js"
-    ]
-  }
-</codepen-resources>
-
-<codepen-additional lang="js">
-  const { required, maxLength, email } = validators
-  const validationMixin = vuelidate.validationMixin
-
-  Vue.use(vuelidate.default)
-</codepen-additional>

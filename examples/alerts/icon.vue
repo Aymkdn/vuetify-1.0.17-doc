@@ -1,10 +1,10 @@
 <template>
   <div>
-    <v-alert :value="true" color="success" icon="new_releases">
+    <v-alert color="success" icon="new_releases" :value="true">
       This is a success alert with a custom icon.
     </v-alert>
 
-    <v-alert :value="true" color="error">
+    <v-alert color="error" :value="true">
       This is an error alert with no icon.
     </v-alert>
   </div>

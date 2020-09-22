@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer permanent>
+  <v-navigation-drawer permanent light>
     <v-toolbar flat>
       <v-list>
         <v-list-tile>
@@ -30,8 +30,7 @@
         items: [
           { title: 'Home', icon: 'dashboard' },
           { title: 'About', icon: 'question_answer' }
-        ],
-        right: null
+        ]
       }
     }
   }

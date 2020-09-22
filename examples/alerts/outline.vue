@@ -1,18 +1,18 @@
 <template>
   <div>
-    <v-alert :value="true" outline color="success" icon="check_circle">
+    <v-alert outline color="success" icon="check_circle" :value="true">
       This is a success alert.
     </v-alert>
 
-    <v-alert :value="true" outline color="info" icon="info">
+    <v-alert outline color="info" icon="info" :value="true">
       This is an info alert.
     </v-alert>
 
-    <v-alert :value="true" outline color="warning" icon="priority_high">
+    <v-alert outline color="warning" icon="priority_high" :value="true">
       This is a warning alert.
     </v-alert>
 
-    <v-alert :value="true" outline color="error" icon="warning">
+    <v-alert outline color="error" icon="warning" :value="true">
       This is a error alert.
     </v-alert>
   </div>
