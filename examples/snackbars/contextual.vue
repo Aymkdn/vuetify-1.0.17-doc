@@ -1,5 +1,5 @@
 <template>
-  <v-card color="grey lighten-4">
+  <v-card>
     <v-card-text>
       <v-container fluid>
         <v-layout row wrap>
@@ -7,7 +7,6 @@
             <v-radio-group v-model="color" row>
               <v-radio
                 v-for="(colorValue, i) in ['success', 'info', 'error', 'cyan darken-2']"
-                light
                 :key="i"
                 :value="colorValue"
                 :label="colorValue"
@@ -16,10 +15,10 @@
             </v-radio-group>
           </v-flex>
           <v-flex xs12 sm3>
-            <v-checkbox v-model="mode" value="multi-line" label="Multi-line (mobile)" light></v-checkbox>
+            <v-checkbox v-model="mode" value="multi-line" label="Multi-line (mobile)"></v-checkbox>
           </v-flex>
           <v-flex xs12 sm3>
-            <v-checkbox v-model="mode" value="vertical" label="Vertical (mobile)" light></v-checkbox>
+            <v-checkbox v-model="mode" value="vertical" label="Vertical (mobile)"></v-checkbox>
           </v-flex>
           <v-flex xs12 sm4 offset-sm4>
             <v-text-field v-model="text" type="text" label="Text"></v-text-field>
@@ -30,7 +29,7 @@
         </v-layout>
 
       </v-container>
-      <v-btn block color="primary" @click.native="snackbar = true" dark>Show Snackbar</v-btn>
+      <v-btn block color="primary" dark @click.native="snackbar = true">Show Snackbar</v-btn>
     </v-card-text>
     <v-snackbar
       :timeout="timeout"

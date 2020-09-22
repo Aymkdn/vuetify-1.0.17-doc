@@ -11,9 +11,11 @@
       overflow
       app
     ></v-navigation-drawer>
-    <v-toolbar app absolute :clipped-left="primaryDrawer.clipped">
-      <v-toolbar-side-icon @click.stop="primaryDrawer.model = !primaryDrawer.model"
-                           v-if="primaryDrawer.type !== 'permanent'"></v-toolbar-side-icon>
+    <v-toolbar :clipped-left="primaryDrawer.clipped" app absolute>
+      <v-toolbar-side-icon
+        v-if="primaryDrawer.type !== 'permanent'"
+        @click.stop="primaryDrawer.model = !primaryDrawer.model"
+      ></v-toolbar-side-icon>
       <v-toolbar-title>Vuetify</v-toolbar-title>
     </v-toolbar>
     <v-content>
@@ -25,7 +27,7 @@
                 <v-layout row wrap>
                   <v-flex xs12 md6>
                     <span>Scheme</span>
-                    <v-switch primary label="Dark" v-model="dark"></v-switch>
+                    <v-switch v-model="dark" primary label="Dark"></v-switch>
                   </v-flex>
                   <v-flex xs12 md6>
                     <span>Drawer</span>
@@ -33,18 +35,18 @@
                       <v-radio
                         v-for="drawer in drawers"
                         :key="drawer"
-                        primary
                         :label="drawer"
                         :value="drawer.toLowerCase()"
+                        primary
                       ></v-radio>
                     </v-radio-group>
-                    <v-switch label="Clipped" v-model="primaryDrawer.clipped" primary></v-switch>
-                    <v-switch label="Floating" v-model="primaryDrawer.floating" primary></v-switch>
-                    <v-switch label="Mini" v-model="primaryDrawer.mini" primary></v-switch>
+                    <v-switch v-model="primaryDrawer.clipped" label="Clipped" primary></v-switch>
+                    <v-switch v-model="primaryDrawer.floating" label="Floating" primary></v-switch>
+                    <v-switch v-model="primaryDrawer.mini" label="Mini" primary></v-switch>
                   </v-flex>
                   <v-flex xs12 md6>
                     <span>Footer</span>
-                    <v-switch label="Fixed" v-model="footer.fixed" primary></v-switch>
+                    <v-switch v-model="footer.inset" label="Inset" primary></v-switch>
                   </v-flex>
                 </v-layout>
               </v-card-text>
@@ -58,8 +60,8 @@
         </v-layout>
       </v-container>
     </v-content>
-    <v-footer :fixed="footer.fixed" app>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
+    <v-footer :inset="footer.inset" app>
+      <span class="px-3">&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
 </template>
@@ -68,16 +70,16 @@
   export default {
     data: () => ({
       dark: true,
-      drawers: ['Permanent', 'Persistent', 'Temporary'],
+      drawers: ['Default (no property)', 'Permanent', 'Temporary'],
       primaryDrawer: {
         model: null,
-        type: 'persistent',
+        type: 'default (no property)',
         clipped: false,
         floating: false,
         mini: false
       },
       footer: {
-        fixed: false
+        inset: false
       }
     })
   }

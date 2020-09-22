@@ -1,79 +1,88 @@
 <template>
   <v-layout justify-center column>
     <v-subheader>Today</v-subheader>
-    <v-expansion-panel>
-      <v-expansion-panel-content hide-actions>
-        <v-layout align-center row spacer slot="header">
-          <v-flex xs1>
-            <v-avatar size="36px" slot="activator">
-              <img src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460" alt="">
+    <v-expansion-panel popout>
+      <v-expansion-panel-content
+        v-for="(message, i) in messages"
+        :key="i"
+        hide-actions
+      >
+        <v-layout slot="header" align-center row spacer>
+          <v-flex xs4 sm2 md1>
+            <v-avatar
+              slot="activator"
+              size="36px"
+            >
+              <img
+                v-if="message.avatar"
+                src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
+                alt=""
+              >
+              <v-icon v-else :color="message.color">{{ message.icon }}</v-icon>
             </v-avatar>
           </v-flex>
-          <v-flex xs3>
-            <strong>John Leider</strong>
+          <v-flex sm5 md3 hidden-xs-only>
+            <strong v-html="message.name"></strong>
+            <span v-if="message.total" class="grey--text">&nbsp;({{ message.total }})</span>
           </v-flex>
-          <v-flex no-wrap>
-            <strong>Welcome to Vuetify.js!</strong>
-            &nbsp;&mdash;
+          <v-flex no-wrap xs5 sm3>
+            <v-chip
+              v-if="message.new"
+              :color="`${message.color} lighten-4`"
+              label
+              small
+              class="ml-0"
+            >{{ message.new }} new</v-chip>
+            <strong v-html="message.title"></strong>
           </v-flex>
           <v-flex
+            v-if="message.excerpt"
             class="grey--text"
             ellipsis
+            hidden-sm-and-down
           >
-            Thank you for joining our community and for using Vuetify in your projects
+            &mdash;
+            {{ message.excerpt }}
           </v-flex>
         </v-layout>
         <v-card>
           <v-divider></v-divider>
-          <v-card-text>
-            Hello
-          </v-card-text>
-        </v-card>
-      </v-expansion-panel-content>
-      <v-expansion-panel-content hide-actions>
-        <v-layout align-center row spacer slot="header">
-          <v-flex xs1>
-            <v-avatar size="36px" slot="activator">
-              <v-icon color="red">people</v-icon>
-            </v-avatar>
-          </v-flex>
-          <v-flex xs3>
-            <strong class="red--text">Social</strong>&nbsp;<span class="grey--text">(3)</span>
-          </v-flex>
-          <v-flex>
-            <v-chip label small color="red lighten-4" class="ml-0">1 new</v-chip>
-            <strong>Twitter</strong>
-          </v-flex>
-        </v-layout>
-        <v-card>
-          <v-divider></v-divider>
-          <v-card-text>
-            Hello
-          </v-card-text>
-        </v-card>
-      </v-expansion-panel-content>
-      <v-expansion-panel-content hide-actions>
-        <v-layout align-center row spacer slot="header">
-          <v-flex xs1>
-            <v-avatar size="36px" slot="activator">
-              <v-icon color="cyan darken-1">local_offer</v-icon>
-            </v-avatar>
-          </v-flex>
-          <v-flex xs3>
-            <strong class="cyan--text text--darken-1">Promos</strong>&nbsp;<span class="grey--text">(4)</span>
-          </v-flex>
-          <v-flex xs3 no-wrap>
-            <v-chip label small color="cyan lighten-4" class="ml-0">2 new</v-chip>
-            <strong>Shop your way</strong>
-            <span>, New deals available, Join Today</span>
-          </v-flex>
-        </v-layout>
-        <v-card>
-          <v-card-text>
-            Hello
-          </v-card-text>
+          <v-card-text v-text="lorem"></v-card-text>
         </v-card>
       </v-expansion-panel-content>
     </v-expansion-panel>
   </v-layout>
 </template>
+
+<script>
+  export default {
+    data: () => ({
+      messages: [
+        {
+          avatar: 'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460',
+          name: 'John Leider',
+          title: 'Welcome to Vuetify.js!',
+          excerpt: 'Thank you for joining our community...'
+        },
+        {
+          color: 'red',
+          icon: 'people',
+          name: 'Social',
+          new: 1,
+          total: 3,
+          title: 'Twitter'
+        },
+        {
+          color: 'teal',
+          icon: 'local_offer',
+          name: 'Promos',
+          new: 2,
+          total: 4,
+          title: 'Shop your way',
+          exceprt: 'New deals available, Join Today'
+        }
+      ],
+      lorem: 'Lorem ipsum dolor sit amet, at aliquam vivendum vel, everti delicatissimi cu eos. Dico iuvaret debitis mel an, et cum zril menandri. Eum in consul legimus accusam. Ea dico abhorreant duo, quo illum minimum incorrupte no, nostro voluptaria sea eu. Suas eligendi ius at, at nemore equidem est. Sed in error hendrerit, in consul constituam cum.'
+    })
+  }
+</script>

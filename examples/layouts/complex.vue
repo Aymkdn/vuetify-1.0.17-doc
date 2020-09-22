@@ -1,9 +1,8 @@
 <template>
   <v-app id="inspire">
     <v-navigation-drawer
-      fixed
       v-model="drawerRight"
-      :stateless="right"
+      fixed
       right
       clipped
       app
@@ -32,9 +31,8 @@
       <v-toolbar-side-icon @click.stop="drawerRight = !drawerRight"></v-toolbar-side-icon>
     </v-toolbar>
     <v-navigation-drawer
-      fixed
       v-model="drawer"
-      :stateless="left"
+      fixed
       app
     >
       <v-list dense>
@@ -49,26 +47,40 @@
       </v-list>
     </v-navigation-drawer>
     <v-navigation-drawer
-      temporary
       v-model="left"
+      temporary
       fixed
     ></v-navigation-drawer>
     <v-content>
       <v-container fluid fill-height>
         <v-layout justify-center align-center>
-          <v-tooltip right>
-            <v-btn icon large :href="source" target="_blank" slot="activator">
-              <v-icon large>code</v-icon>
-            </v-btn>
-            <span>Source</span>
-          </v-tooltip>
+          <v-flex shrink>
+            <v-tooltip right>
+              <v-btn
+                slot="activator"
+                :href="source"
+                icon
+                large
+                target="_blank"
+              >
+                <v-icon large>code</v-icon>
+              </v-btn>
+              <span>Source</span>
+            </v-tooltip>
+            <v-tooltip right>
+              <v-btn slot="activator" icon large href="https://codepen.io/johnjleider/pen/KQrPKJ" target="_blank">
+                <v-icon large>mdi-codepen</v-icon>
+              </v-btn>
+              <span>Codepen</span>
+            </v-tooltip>
+          </v-flex>
         </v-layout>
       </v-container>
     </v-content>
     <v-navigation-drawer
+      v-model="right"
       right
       temporary
-      v-model="right"
       fixed
     ></v-navigation-drawer>
     <v-footer color="blue-grey" class="white--text" app>
@@ -82,8 +94,8 @@
 <script>
   export default {
     data: () => ({
-      drawer: null,
-      drawerRight: null,
+      drawer: true,
+      drawerRight: true,
       right: null,
       left: null
     }),
