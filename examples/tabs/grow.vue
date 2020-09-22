@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-toolbar color="cyan" dark tabs>
+  <v-tabs dark grow>
+    <v-toolbar color="cyan" dark>
       <v-toolbar-side-icon></v-toolbar-side-icon>
       <v-toolbar-title>Page title</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -10,33 +10,51 @@
       <v-btn icon>
         <v-icon>more_vert</v-icon>
       </v-btn>
-      <v-tabs
-        slot="extension"
-        v-model="tab"
-        color="cyan"
-        grow
-      >
+      <v-tabs-bar class="cyan" slot="extension">
         <v-tabs-slider color="yellow"></v-tabs-slider>
-        <v-tab v-for="item in items" :key="item">
+        <v-tabs-item
+          v-for="(item, i) in items"
+          :key="i"
+          :href="'#tab-' + (i + 1)"
+        >
           {{ item }}
-        </v-tab>
-      </v-tabs>
+        </v-tabs-item>
+        <v-menu :nudge-width="100" left bottom>
+          <v-tabs-item slot="activator">
+            Menu
+            <v-icon>arrow_drop_down</v-icon>
+          </v-tabs-item>
+          <v-list class="grey lighten-3">
+            <v-list-tile
+              tag="a"
+              v-for="n in 4"
+              :key="n"
+              @click=""
+            >
+              Item {{ n }}
+            </v-list-tile>
+          </v-list>
+        </v-menu>
+      </v-tabs-bar>
     </v-toolbar>
-    <v-tabs-items v-model="tab">
-      <v-tab-item v-for="item in items" :key="item">
+    <v-tabs-items>
+      <v-tabs-content
+        v-for="i in 5"
+        :key="i"
+        :id="'tab-' + i"
+      >
         <v-card flat>
           <v-card-text>{{ text }}</v-card-text>
         </v-card>
-      </v-tab-item>
+      </v-tabs-content>
     </v-tabs-items>
-  </div>
+  </v-tabs>
 </template>
 
 <script>
   export default {
     data () {
       return {
-        tab: null,
         items: [
           'web', 'shopping', 'videos', 'images', 'news'
         ],

@@ -1,19 +1,20 @@
 <template>
-  <v-layout wrap style="height: 200px;">
+  <v-layout wrap>
     <v-container>
       <v-layout justify-center>
-        <v-btn dark color="pink" @click.stop="drawer = !drawer">Toggle</v-btn>
+        <v-btn @click.stop="drawer = !drawer" dark color="pink">Toggle</v-btn>
       </v-layout>
     </v-container>
     <v-navigation-drawer
-      v-model="drawer"
       temporary
+      v-model="drawer"
+      light
       absolute
     >
       <v-list class="pa-1">
         <v-list-tile avatar>
           <v-list-tile-avatar>
-            <img src="https://randomuser.me/api/portraits/men/85.jpg" >
+            <img src="https://randomuser.me/api/portraits/men/85.jpg" />
           </v-list-tile-avatar>
           <v-list-tile-content>
             <v-list-tile-title>John Leider</v-list-tile-title>
